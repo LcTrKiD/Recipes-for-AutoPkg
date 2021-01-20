@@ -58,9 +58,8 @@ class XcodeXIPUnpacker(Processor):
         self.output(
             "Extracting xip archive, please be patient, this could take a long time..."
         )
-        os.chdir(output)
         cmd = ["/usr/bin/xip", "--expand", xip_path]
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=output)
         (out, err) = proc.communicate()
         if err:
             raise ProcessorError(err)
